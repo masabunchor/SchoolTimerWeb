@@ -34,7 +34,12 @@ function updateTimer() {
         drawTimer();
     } else {
         clearInterval(interval);
-        alert("時間になりました！"); // アラート表示
+        // アラーム再生
+        const p = new Audio("public/se/alarm.mp3").play(); 
+        p.then(function(){
+            // アラート表示
+            alert("時間になりました！");
+        }); 
     }
 }
 
