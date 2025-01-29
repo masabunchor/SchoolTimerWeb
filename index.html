@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>スクールタイマーWEB</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <script type="text/javascript" src="scripts/script.js"></script>
 </head>
 <body onload="drawTimer()">
     <div id="container">
         <div id="controls">
-            <label>時間を入力 (分): </label>
-            <input type="number" id="timeInput" value="5">
+            <label>時間を入力: </label>
+            <input type="number" id="minutesInput" value="0" min="0" max="60"> 分
+            <input type="number" id="secondsInput" value="0" min="0" max="59"> 秒
             <button onclick="startTimer()">スタート</button>
             <button id="pauseResumeButton" onclick="pauseResumeTimer()" disabled>一時停止</button>
         </div>

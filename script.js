@@ -6,10 +6,19 @@ let isPaused = false;
 
 function startTimer() {
     clearInterval(interval);
-    const minutes = parseInt(document.getElementById("timeInput").value, 10);
-    totalTime = minutes * 60;
+
+    const minutes = parseInt(document.getElementById("minutesInput").value, 10) || 0;
+    const seconds = parseInt(document.getElementById("secondsInput").value, 10) || 0;
+    
+    totalTime = (minutes * 60) + seconds;
     remainingTime = totalTime;
-    maxAngle = (minutes / 60) * 2 * Math.PI;
+    maxAngle = (totalTime / 3600) * 2 * Math.PI;
+
+    if (totalTime <= 0) {
+        alert("時間を入力してください！");
+        return;
+    }
+
     isPaused = false;
 
     document.getElementById("pauseResumeButton").textContent = "一時停止";
@@ -102,6 +111,8 @@ function drawTicksAndNumbers(ctx, centerX, centerY, radius) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
+    const labels = [0, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5];
+
     for (let i = 0; i < 60; i++) {
         const angle = (-Math.PI / 2) + (i * (2 * Math.PI / 60));
         const isFiveMinuteTick = i % 5 === 0;
@@ -121,10 +132,10 @@ function drawTicksAndNumbers(ctx, centerX, centerY, radius) {
         ctx.closePath();
 
         if (isFiveMinuteTick) {
+            const labelIndex = i / 5;
             const numberX = centerX + Math.cos(angle) * numberRadius;
             const numberY = centerY + Math.sin(angle) * numberRadius;
-            const number = (i === 0) ? 0 : i;
-            ctx.fillText(number, numberX, numberY);
+            ctx.fillText(labels[labelIndex], numberX, numberY);
         }
     }
 }
