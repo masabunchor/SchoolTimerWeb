@@ -58,7 +58,7 @@ function drawTimer() {
     const canvas = document.getElementById("timerCanvas");
     const ctx = canvas.getContext("2d");
 
-    const canvasSize = Math.min(window.innerWidth, window.innerHeight) - 100;
+    const canvasSize = Math.min(window.innerWidth * 0.6, 500); // 画面幅に応じたサイズ調整
     canvas.width = canvasSize;
     canvas.height = canvasSize;
 
@@ -66,7 +66,7 @@ function drawTimer() {
     const height = canvas.height;
     const centerX = width / 2;
     const centerY = height / 2;
-    const radius = width / 2 - 80;
+    const radius = width / 2 - 50;
 
     ctx.clearRect(0, 0, width, height);
 
@@ -99,7 +99,7 @@ function drawTimer() {
     ctx.restore();
 
     drawTicksAndNumbers(ctx, centerX, centerY, radius);
-    document.getElementById("timeDisplay").innerText = formatTime(remainingTime);
+    document.getElementById("digitalDisplay").innerText = formatTime(remainingTime);
 }
 
 function drawTicksAndNumbers(ctx, centerX, centerY, radius) {
@@ -111,7 +111,7 @@ function drawTicksAndNumbers(ctx, centerX, centerY, radius) {
     ctx.strokeStyle = "black";
     ctx.lineWidth = 1;
 
-    ctx.font = `${Math.max(radius / 10, 15)}px Arial`;
+    ctx.font = `${Math.max(radius / 7, 24)}px Arial`;
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -140,7 +140,7 @@ function drawTicksAndNumbers(ctx, centerX, centerY, radius) {
             const labelIndex = i / 5;
             const numberX = centerX + Math.cos(angle) * numberRadius;
             const numberY = centerY + Math.sin(angle) * numberRadius;
-            ctx.fillText(labels[labelIndex], numberX, numberY);
+            ctx.fillText(labels[labelIndex], numberX, numberY, 40);
         }
     }
 }
